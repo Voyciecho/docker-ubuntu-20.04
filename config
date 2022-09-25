@@ -1,0 +1,31 @@
+#!/bin/sh
+
+[ -n "${1}" ] && DOCKER_PLATFORM="${1}"
+
+if [ "${DOCKER_PLATFORM}" = "base" ]; then
+
+    export DOCKER_IMAGE=ubuntu2004base:1.0
+    export DOCKER_FILE=Dockerfile-ubuntu-20-04-lts-base
+    export DOCKER_HOSTNAME=ubuntu2004
+
+elif [ "${DOCKER_PLATFORM}" = "plotly" ]; then
+
+    export DOCKER_IMAGE=ubuntu2004plotly:1.0
+    export DOCKER_FILE=Dockerfile-ubuntu-20-04-lts-plotly
+    export DOCKER_HOSTNAME=ubuntu2004plotly
+
+elif [ "${DOCKER_PLATFORM}" = "nodejs" ]; then
+
+    export DOCKER_IMAGE=ubuntu2004nodejs:1.0
+    export DOCKER_FILE=Dockerfile-ubuntu-20-04-lts-nodejs
+    export DOCKER_HOSTNAME=ubuntu2004nodejs
+
+else
+    echo "ERROR: Specify platform"
+    exit 1
+fi
+
+export DOCKER_USER=`id -un`
+export DOCKER_GROUP=`id -gn`
+export DOCKER_USER_UID=`id -u`
+export DOCKER_USER_GID=`id -g`
